@@ -1,6 +1,7 @@
 import streamlit as st
 
 st.title("Título de la web (H1)")
+st.write("# Título de la web (H1)")
 st.header("Encabezado (H2)")
 st.subheader("Subtítulo (H3)")
 st.write("## Encabezado (H2)")
@@ -16,8 +17,10 @@ st.caption("---")
 st.latex(r"e^2")
 # Objeto json formateado en la pantalla
 st.json({"Nombre": "Pedro", "Edad": 51})
+
 codigo = """from math import pi"""
 st.code(codigo, language = "python")
+
 # Etiqueta de visualización de valores
 st.metric(label = "Velocidad del viento", 
           value = "120m/s", delta = "1.4m/s")
@@ -25,5 +28,5 @@ st.metric(label = "Velocidad del viento",
 import pandas as pd
 # Visualización de un DataFrame
 # tabla = pd.read_csv("Empresas.csv")
-#tabla = tabla.drop("Unnamed: 0", axis=1)
-#st.table(tabla.head(10))
+# tabla = tabla.drop("Unnamed: 0", axis=1)
+# st.table(tabla.head(10))
