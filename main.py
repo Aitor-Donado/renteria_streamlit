@@ -27,6 +27,6 @@ st.metric(label = "Velocidad del viento",
 
 import pandas as pd
 # Visualización de un DataFrame
-# tabla = pd.read_csv("Empresas.csv")
-# tabla = tabla.drop("Unnamed: 0", axis=1)
-# st.table(tabla.head(10))
+tabla = pd.read_csv("Empresas.csv")
+tabla = tabla.drop("Unnamed: 0", axis=1)
+st.table(tabla.head(20))
