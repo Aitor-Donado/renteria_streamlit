@@ -1,5 +1,6 @@
 import streamlit as st
 import re
+import datetime
 
 # Expresión regular para validar el correo electrónico
 patron_email = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
@@ -18,10 +19,10 @@ with st.form("Formulario", clear_on_submit=True):  # Limpiar el formulario al en
     contraseña = st.text_input("Contraseña", type="password")
     confirmar_contraseña = st.text_input("Confirmar Contraseña", type="password")
 
-    dia, mes, año = st.columns(3)
-    dia_nacimiento = dia.text_input("Día")
-    mes_nacimiento = mes.text_input("Mes")
-    año_nacimiento = año.text_input("Año")
+    fecha_nacimiento = st.date_input("Introduce tu fecha de nacimiento",
+                                     min_value=datetime.date(1920,1,1),
+                                     value = datetime.date.today())
+    
 
     # Botón de envío
     enviado = st.form_submit_button("Enviar")
@@ -39,11 +40,8 @@ if enviado:
             "Primer Nombre": nombre,
             "Apellido": apellido,
             "Correo Electrónico": correo,
-            "Fecha de Nacimiento": {
-                "Día": dia_nacimiento,
-                "Mes": mes_nacimiento,
-                "Año": año_nacimiento
-            }
+            "Contraseña": contraseña,
+            "Fecha de Nacimiento": fecha_nacimiento
         }
         st.success("Formulario enviado con éxito!")
         st.json(datos_usuario)
