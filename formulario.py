@@ -1,13 +1,18 @@
 import streamlit as st
+import re
 
+# Expresión regular para validar el correo electrónico
+patron_email = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+
+# Título centrado
 st.markdown("<h1 style='text-align: center;'>Registro de Usuario</h1>", unsafe_allow_html=True)
 
 # Crear el formulario
-with st.form("Formulario", clear_on_submit=True):
+with st.form("Formulario", clear_on_submit=True):  # Limpiar el formulario al enviar
     col1, col2 = st.columns(2)
 
     # Entradas del formulario
-    primer_nombre = col1.text_input("Nombre")
+    nombre = col1.text_input("Nombre")
     apellido = col2.text_input("Apellidos")
     correo = st.text_input("Correo Electrónico")
     contraseña = st.text_input("Contraseña", type="password")
@@ -23,17 +28,15 @@ with st.form("Formulario", clear_on_submit=True):
 
 # Mostrar los datos en formato JSON si se envía el formulario
 if enviado:
-    if not all([primer_nombre, 
-                apellido, 
-                correo, 
-                contraseña, 
-                confirmar_contraseña]):
+    if not all([nombre, apellido, correo, contraseña, confirmar_contraseña]):
         st.warning("Por favor, complete todos los campos.")
     elif contraseña != confirmar_contraseña:
         st.error("Las contraseñas no coinciden.")
+    elif not re.fullmatch(patron_email, correo):
+        st.error("El email no es correcto.")
     else:
         datos_usuario = {
-            "Primer Nombre": primer_nombre,
+            "Primer Nombre": nombre,
             "Apellido": apellido,
             "Correo Electrónico": correo,
             "Fecha de Nacimiento": {
