@@ -26,15 +26,28 @@ area_data = pd.DataFrame({'Time': range(1, 11),
 st.area_chart(area_data.set_index('Time'))
 
 st.divider()
+# Crear el DataFrame con dos series de datos
+st.write('Gráfico de área con dos series `st.area_chart(area_data.set_index("Time"))`')
+area_data = pd.DataFrame({
+    'Time': range(1, 11),  # Eje X: Tiempo
+    'Value1': np.random.randn(10).cumsum(),  # Serie 1
+    'Value2': np.random.randn(10).cumsum()   # Serie 2
+})
+
+# Graficar ambas series en un gráfico de área
+st.area_chart(area_data.set_index('Time'))
+
+st.divider()
 # Scatter chart
 st.write('Gráfico de dispersión `st.scatter_chart(data)`')
 data = pd.DataFrame(np.random.randn(100, 2), columns= ['A', 'B'])
-st.scatter_chart(data)
+st.scatter_chart(data[["A","B"]])
 
 st.divider()
 # Mapa
 st.write('Mapa `st.map(data)`')
-data = pd.DataFrame({'lat': [43.26093, 43.296782], 'lon': [-2.93611, -1.895542]})
+data = pd.DataFrame({'lat': [43.26093, 43.296782], 
+                     'lon': [-2.93611, -1.895542]})
 st.map(data)
 
 st.divider()
