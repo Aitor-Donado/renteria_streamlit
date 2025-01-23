@@ -1,36 +1,50 @@
 def convertir_a_atmosferas(valor, unidad):
-    if unidad == "mm de mercurio":
-        return valor / 760
+    if unidad == "pascales":
+        return valor / 101325  # 1 atm = 101325 Pa
+    elif unidad == "mm de mercurio":
+        return valor / 760  # 1 atm = 760 mmHg
     elif unidad == "milibares":
-        return valor / 1013.25
+        return valor / 1013.25  # 1 atm = 1013.25 mbar
     else:
-        return valor
+        return valor  # Si la unidad ya es atmósferas, no se convierte
+    
+def convertir_a_pascales(valor, unidad):
+    if unidad == "atmósferas":
+        return valor * 101325  # 1 atm = 101325 Pa
+    elif unidad == "mm de mercurio":
+        return valor * 133.322  # 1 mmHg = 133.322 Pa
+    elif unidad == "milibares":
+        return valor * 100  # 1 mbar = 100 Pa
+    else:
+        return valor  # Si la unidad ya es pascales, no se convierte
 
 def convertir_a_mm_de_mercurio(valor, unidad):
-    if unidad == "atmósferas":
-        return valor * 760
+    if unidad == "pascales":
+        return valor / 133.322  # 1 mmHg = 133.322 Pa
+    elif unidad == "atmósferas":
+        return valor * 760  # 1 atm = 760 mmHg
     elif unidad == "milibares":
-        return valor * 760 / 1013.25
+        return valor * 760 / 1013.25  # 1 mbar = 0.750062 mmHg
     else:
-        return valor
+        return valor  # Si la unidad ya es mmHg, no se convierte
 
 def convertir_a_milibares(valor, unidad):
-    if unidad == "atmósferas":
-        return valor * 1013.25
+    if unidad == "pascales":
+        return valor / 100  # 1 mbar = 100 Pa
+    elif unidad == "atmósferas":
+        return valor * 1013.25  # 1 atm = 1013.25 mbar
     elif unidad == "mm de mercurio":
-        return valor * 1013.25 / 760
+        return valor * 1013.25 / 760  # 1 mmHg = 1.33322 mbar
     else:
-        return valor
+        return valor  # Si la unidad ya es mbar, no se convierte
 
 def convertir_presion(valor, unidad):
-    if unidad not in ["atmósferas", "mm de mercurio", "milibares"]:
-        raise ValueError("Unidad no válida. Las unidades permitidas son 'atmósferas', 'mm de mercurio' y 'milibares'.")
-    
     atmosferas = convertir_a_atmosferas(valor, unidad)
     mm_de_mercurio = convertir_a_mm_de_mercurio(valor, unidad)
     milibares = convertir_a_milibares(valor, unidad)
+    pascales = convertir_a_pascales(valor, unidad)
     
-    return atmosferas, mm_de_mercurio, milibares
+    return atmosferas, mm_de_mercurio, milibares, pascales
 
 if __name__ == "__main__":
     # Ejemplo de uso:

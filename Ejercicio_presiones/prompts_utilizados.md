@@ -13,5 +13,5 @@ Crear una aplicación de streamlit con un input_number y un select_box que recib
 Que use la función importándola así
 
 from conversor import convertir_presion
-y
- coloque los valores devueltos en una tabla en la que la primera columna sea el valor calculado y la segunda sea las tres unidades posibles.
+
+y coloque los valores devueltos en una tabla en la que la primera columna sea el valor calculado y la segunda sea las tres unidades posibles.
