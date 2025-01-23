@@ -56,8 +56,9 @@ st.write(multi_select)
 valor = st.slider("Deslizante", min_value=50, max_value=150, value=75)
 print(valor)
 
-opciones = ['infrared', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
-start_color, end_color = st.select_slider('Selecciona un color',
+opciones = ['infrared', 'red', 'orange', 'yellow', 'green', 
+            'blue', 'indigo', 'violet', 'ultraviolet']
+start_color, end_color = st.select_slider('Selecciona una gama de colores',
                                             options=opciones,
                                             value=('red', 'blue'))
 st.write(f'Has seleccionado entre {start_color} y {end_color}')
