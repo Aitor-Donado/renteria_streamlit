@@ -18,6 +18,12 @@ data_df = pd.DataFrame(
         "Data Exploration"],
     })
 
+# Vista estática del dataframe.
+st.write("### DataFrame visto con st.table")
+st.table(data_df)
+st.divider()
+
+st.write("### Visto con st.data_editor y configuración personalizada")
 # En esta columna se valida el texto
 columna_texto = st.column_config.TextColumn("Widgets de Streamlit", 
                     help="Comandos **widget** de streamlit",
