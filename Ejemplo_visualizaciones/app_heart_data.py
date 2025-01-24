@@ -43,11 +43,15 @@ with col2:
     grafico2 = data_filtrada.boxplot(column=seleccion_num, by=seleccion_cat, ax=None, fontsize=None, rot=90, grid=True)
     st.pyplot(grafico2.figure)  # Mostrar el gráfico en la segunda columna
 
+# Crear el heatmap de correlación
+st.write("Heatmap de correlación:")
 f, ax = plt.subplots(figsize=(10, 8))
 corr = data.corr()
-graf = sns.heatmap(corr, annot=True,
+sns.heatmap(corr, annot=True,
             mask=np.triu(np.ones_like(corr)),
             cmap=sns.diverging_palette(220, 10, as_cmap=True),
             square=True,
-            ax=ax);
-st.plotly_chart(f, ax)
+            ax=ax)
+
+# Mostrar el gráfico en Streamlit
+st.pyplot(f)
