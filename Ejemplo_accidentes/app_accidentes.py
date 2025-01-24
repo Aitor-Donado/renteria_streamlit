@@ -14,9 +14,11 @@ col1, col2 = st.columns(2)
 with col1:
     grafico_causa = df["cause"].value_counts().plot(kind="pie")
     st.pyplot(grafico_causa.figure)
-    grafico_ciudad = df["cityTown"].value_counts().plot(kind="pie")
-    st.pyplot(grafico_ciudad.figure)
 
+    st.divider()
+    grafico_ciudad = df["cityTown"].value_counts()[:10].plot(kind="pie")
+    st.pyplot(grafico_ciudad.figure)
+ 
 df2 = df[["incidenceId", "latitude", "longitude"]]
 
 import folium
