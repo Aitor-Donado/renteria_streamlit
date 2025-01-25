@@ -18,7 +18,23 @@ with col1:
     st.divider()
     grafico_ciudad = df["cityTown"].value_counts()[:10].plot(kind="pie")
     st.pyplot(grafico_ciudad.figure)
- 
+
+st.markdown("# Filtador de datos")
+# Elección de columnas categóricas
+categoricas = df.columns[df.apply(lambda x: len(x.unique()))<10]
+categoricas = ["Ninguna"] + list(categoricas)
+#st.write(categoricas)
+seleccion = st.selectbox("Elige variable categórica", options= categoricas)
+st.text(seleccion)
+
+if seleccion != "Ninguna":
+    # Es un selector desplegable que permite varias opciones
+    opciones = df[seleccion].unique()
+    multi_select = st.multiselect("Elige la categoría", options= opciones)
+    st.write(multi_select)
+    if multi_select:
+        df = df[df[seleccion].isin(multi_select)]
+
 df2 = df[["incidenceId", "latitude", "longitude"]]
 
 import folium

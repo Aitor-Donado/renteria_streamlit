@@ -13,13 +13,15 @@ with col1:
 with col2:
     number_input = st.number_input("Enter a number")
 
-# Button in its own containerotón dentro de supropio contenedor
+# Botón dentro de su propio contenedor
 with st.container():
     if st.button('Púlsame'):
         st.write('¡Botón pulsado!')
 
-
+# Botón dentro de su propio contenedor. Otra sintaxis.
 contenedor = st.container()
+# Si creo un objeto exactamente igual a otro anterior da error
+# Así que tengo que darle una key distinta
 if contenedor.button("Púlsame", key="Segundo_boton"):
     contenedor.write("!Segundo botón pulsado!")
 

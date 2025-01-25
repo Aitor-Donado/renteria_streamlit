@@ -16,7 +16,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.write("Categorías. Gráfico de barras:")
-    categoricas = data.columns[data.apply(lambda x: len(x.unique()))<4]
+    categoricas = data.columns[data.apply(lambda x: len(x.unique()))<10]
     #st.write(categoricas)
     seleccion = st.selectbox("Elige variable categórica", options= categoricas)
     #st.write(seleccion)
