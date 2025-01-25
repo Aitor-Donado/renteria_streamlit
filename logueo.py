@@ -21,8 +21,32 @@ def login():
             st.success("Inicio de sesión exitoso")
             st.session_state['logged_in'] = True
             st.session_state['username'] = usuario
+            contenido_protegido()
         else:
             st.error("Nombre de usuario o contraseña incorrectos")
+
+def signup():
+    st.title("Registro de nuevo usuario")
+
+    # Input para el nuevo nombre de usuario
+    nuevo_usuario = st.text_input("Elige un nombre de usuario")
+
+    # Input para la nueva contraseña
+    nueva_contraseña = st.text_input("Elige una contraseña", type="password")
+
+    # Input para confirmar la contraseña
+    confirmar_contraseña = st.text_input("Confirma tu contraseña", type="password")
+
+    # Botón para registrarse
+    if st.button("Registrarse"):
+        if nuevo_usuario in usuarios:
+            st.error("El nombre de usuario ya existe. Por favor, elige otro.")
+        elif nueva_contraseña != confirmar_contraseña:
+            st.error("Las contraseñas no coinciden.")
+        else:
+            usuarios[nuevo_usuario] = nueva_contraseña
+            st.success("Registro exitoso. Ahora puedes iniciar sesión.")
+            st.session_state['show_login'] = True  # Mostrar el formulario de login después del registro
 
 def contenido_protegido():
     st.title("Contenido Protegido")
@@ -33,16 +57,27 @@ def contenido_protegido():
     if st.button("Cerrar sesión"):
         st.session_state['logged_in'] = False
         st.session_state['username'] = None
-        st.experimental_rerun()
+        st.rerun()
 
 def main():
     if 'logged_in' not in st.session_state:
         st.session_state['logged_in'] = False
+    if 'show_login' not in st.session_state:
+        st.session_state['show_login'] = True
 
+    # Mostrar el formulario de login o signup según el estado
     if not st.session_state['logged_in']:
-        login()
+        if st.session_state['show_login']:
+            login()
+            if st.button("¿No tienes una cuenta? Regístrate aquí"):
+                st.session_state['show_login'] = False
+        else:
+            signup()
+            if st.button("¿Ya tienes una cuenta? Inicia sesión aquí"):
+                st.session_state['show_login'] = True
     else:
         contenido_protegido()
 
 if __name__ == "__main__":
     main()
+    st.text(usuarios)
