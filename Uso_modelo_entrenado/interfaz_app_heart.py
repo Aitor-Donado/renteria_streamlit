@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import xgboost
 
 # Cargar el modelo guardado
 with open('Uso_modelo_entrenado/modelo_entrenado.pkl', 'rb') as f:
