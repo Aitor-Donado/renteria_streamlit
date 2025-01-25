@@ -18,6 +18,12 @@ with st.container():
     if st.button('Púlsame'):
         st.write('¡Botón pulsado!')
 
+
+contenedor = st.container()
+if contenedor.button("Púlsame", key="Segundo_boton"):
+    contenedor.write("!Segundo botón pulsado!")
+
+
 # Dibujo de un gráfico en un "expander"
 with st.expander("Ver el gráfico"):
     data = pd.DataFrame(np.random.randn(20, 2),
@@ -27,3 +33,6 @@ with st.expander("Ver el gráfico"):
 # Texto del pie de página dentro de un contenedor
 with st.container():
     st.write("Pie de página con un texto.")
+
+
+st.json(st.session_state)
