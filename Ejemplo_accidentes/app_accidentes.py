@@ -1,5 +1,12 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+
+import folium
+from folium.plugins import HeatMap
+# pip install streamlit_folium
+from streamlit_folium import st_folium
+
 
 st.title("Datos Accidentes Euskadi")
 df = pd.read_csv("Ejemplo_accidentes/accidentes_2022.csv")
@@ -14,10 +21,12 @@ col1, col2 = st.columns(2)
 with col1:
     grafico_causa = df["cause"].value_counts().plot(kind="pie")
     st.pyplot(grafico_causa.figure)
+    plt.close()
 
     st.divider()
     grafico_ciudad = df["cityTown"].value_counts()[:10].plot(kind="pie")
     st.pyplot(grafico_ciudad.figure)
+    plt.close()
 
 st.markdown("# Filtador de datos")
 # Elección de columnas categóricas
@@ -37,9 +46,6 @@ if seleccion != "Ninguna":
 
 df2 = df[["incidenceId", "latitude", "longitude"]]
 
-import folium
-from folium.plugins import HeatMap
-from streamlit_folium import st_folium
 # Crear el mapa centrado en una ubicación específica del coordenadas del País Vasco
 mapa_accidentes_heat = folium.Map(location=[43, -2.6], zoom_start=8)
 
